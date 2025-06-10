@@ -11,10 +11,12 @@ function LoginPage() {
       footerText={
         <>
           Нет аккаунта?{" "}
-          <Link className="text-primary underline" to={ROUTES.REGISTER}>Зарегистрироваться</Link>
+          <Link className="text-primary underline" to={ROUTES.REGISTER}>
+            Зарегистрироваться
+          </Link>
         </>
       }
-      form={<LoginForm/>}
+      form={<LoginForm />}
     />
   );
 }

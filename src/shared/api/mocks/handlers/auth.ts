@@ -1,7 +1,11 @@
 import type { ApiSchemas } from "../../schema";
 import { http } from "../http";
 import { delay, HttpResponse } from "msw";
-import { createRefreshTokenCookie, generateTokens, verifyToken } from "@/shared/api/mocks/session.ts";
+import {
+  createRefreshTokenCookie,
+  generateTokens,
+  verifyToken,
+} from "@/shared/api/mocks/session.ts";
 
 const userPasswords = new Map<string, string>();
 const mockUsers: ApiSchemas["User"][] = [
@@ -44,8 +48,8 @@ export const authHandlers = [
       {
         status: 200,
         headers: {
-          'Set-Cookie': createRefreshTokenCookie(refreshToken)
-        }
+          "Set-Cookie": createRefreshTokenCookie(refreshToken),
+        },
       },
     );
   }),
@@ -112,12 +116,11 @@ export const authHandlers = [
         throw new Error("User not found");
       }
 
-      const { accessToken, refreshToken: newRefreshToken } = await generateTokens(
-        {
+      const { accessToken, refreshToken: newRefreshToken } =
+        await generateTokens({
           userId: user.id,
           email: user.email,
-        },
-      );
+        });
 
       return HttpResponse.json(
         {

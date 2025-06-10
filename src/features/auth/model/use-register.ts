@@ -1,22 +1,27 @@
-import { rqClient } from "@/shared/api/instance.ts";
+import { publicRqClient } from "@/shared/api/instance.ts";
 import { ROUTES } from "@/shared/model/routes.tsx";
 import { useNavigate } from "react-router-dom";
 import type { ApiSchemas } from "@/shared/api/schema";
+import { useSession } from "@/shared/model/session.ts";
 
 export function useRegister() {
   const navigate = useNavigate();
 
-  const registerMutation = rqClient.useMutation('post', '/auth/register', {
-    onSuccess() {
+  const session = useSession();
+  const registerMutation = publicRqClient.useMutation("post", "/auth/register", {
+    onSuccess(data) {
+      session.login(data.accessToken);
       navigate(ROUTES.HOME);
     },
   });
 
   const register = (data: ApiSchemas["RegisterRequest"]) => {
     registerMutation.mutate({ body: data });
-  }
+  };
 
-  const errorMessage = registerMutation.isError ? registerMutation.error.message : undefined;
+  const errorMessage = registerMutation.isError
+    ? registerMutation.error.message
+    : undefined;
 
-  return { register, isPending: registerMutation.isPending, errorMessage }
+  return { register, isPending: registerMutation.isPending, errorMessage };
 }

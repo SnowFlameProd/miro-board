@@ -4,7 +4,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from "@/shared/ui/kit/form.tsx";
 import { useForm } from "react-hook-form";
 import { Input } from "@/shared/ui/kit/input.tsx";
@@ -14,12 +14,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useLogin } from "@/features/auth/model/use-login.ts";
 
 const loginSchema = z.object({
-  email: z.string({
-    required_error: "Обязательно"
-  }).email("Неверный email"),
-  password: z.string({
-    required_error: "Обязательно"
-  }).min(6, "Пароль должен быть не менее 6 символов")
+  email: z
+    .string({
+      required_error: "Обязательно",
+    })
+    .email("Неверный email"),
+  password: z
+    .string({
+      required_error: "Обязательно",
+    })
+    .min(6, "Пароль должен быть не менее 6 символов"),
 });
 
 export function LoginForm() {
@@ -27,7 +31,7 @@ export function LoginForm() {
     resolver: zodResolver(loginSchema),
   });
 
-  const {errorMessage, isPending, login} = useLogin();
+  const { errorMessage, isPending, login } = useLogin();
 
   const onSubmit = form.handleSubmit(login);
 
@@ -41,7 +45,7 @@ export function LoginForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="admin@gmail.com" type="email" {...field} />
+                <Input placeholder="admin@gmail.com" {...field} />
               </FormControl>
 
               <FormMessage />
@@ -62,8 +66,12 @@ export function LoginForm() {
             </FormItem>
           )}
         />
-        {errorMessage && <p className="text-destructive text-sm">{errorMessage}</p>}
-        <Button disabled={isPending} type="submit">Войти</Button>
+        {errorMessage && (
+          <p className="text-destructive text-sm">{errorMessage}</p>
+        )}
+        <Button disabled={isPending} type="submit">
+          Войти
+        </Button>
       </form>
     </Form>
   );

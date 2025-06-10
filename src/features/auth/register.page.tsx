@@ -11,10 +11,12 @@ function RegisterPage() {
       footerText={
         <>
           Уже есть аккаунт?{" "}
-          <Link className="text-primary underline" to={ROUTES.LOGIN}>Войти</Link>
+          <Link className="text-primary underline" to={ROUTES.LOGIN}>
+            Войти
+          </Link>
         </>
       }
-      form={<RegisterForm/>}
+      form={<RegisterForm />}
     />
   );
 }
