@@ -1,4 +1,4 @@
-import { rqClient } from "@/shared/api/instance";
+import { rqClient } from "@/shared/api/instance.ts";
 import { useQueryClient } from "@tanstack/react-query";
 import { startTransition, useOptimistic } from "react";
 

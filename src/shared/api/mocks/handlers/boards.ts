@@ -141,9 +141,9 @@ export const boardsHandlers = [
         } else {
           // Для дат (createdAt, updatedAt, lastOpenedAt)
           return (
-            new Date(
+            - new Date(
               b[sort as keyof ApiSchemas["Board"]].toString(),
-            ).getTime() -
+            ).getTime() +
             new Date(a[sort as keyof ApiSchemas["Board"]].toString()).getTime()
           );
         }

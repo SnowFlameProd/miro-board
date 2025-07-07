@@ -14,9 +14,7 @@ export function AppHeader() {
         <div className="text-xl font-semibold">Miro Board</div>
 
         <div className="flex items-center gap-4">
-            <span className="text-sm text-muted-foreground">
-              {session.email}
-            </span>
+          <span className="text-sm text-muted-foreground">{session.email}</span>
           <Button
             variant="outline"
             size="sm"

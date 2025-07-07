@@ -17,20 +17,20 @@ export const router = createBrowserRouter([
         loader: protectedLoader,
         element: (
           <>
-            <AppHeader/>
-            <ProtectedRoute/>
+            <AppHeader />
+            <ProtectedRoute />
           </>
         ),
         children: [
           {
             path: ROUTES.BOARDS,
-            lazy: () => import("@/features/boards-list/boards-list.page"),
+            lazy: () => import("@/features/boards-list/boards-list-recent.page.tsx"),
           },
           {
             path: ROUTES.BOARD,
             lazy: () => import("@/features/board/board.page"),
           },
-        ]
+        ],
       },
       {
         path: ROUTES.LOGIN,
@@ -45,5 +45,5 @@ export const router = createBrowserRouter([
         loader: () => redirect(ROUTES.BOARDS),
       },
     ],
-  }
+  },
 ]);

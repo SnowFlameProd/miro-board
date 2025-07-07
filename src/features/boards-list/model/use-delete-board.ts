@@ -10,22 +10,23 @@ export function useDeleteBoard() {
     {
       onSettled: async () => {
         await queryClient.invalidateQueries(
-          rqClient.queryOptions("get", "/boards")
+          rqClient.queryOptions("get", "/boards"),
         );
       },
-    }
+    },
   );
 
   return {
-    deleteBoard: (boardId: string) => deleteBoardMutation.mutate({
-      params: {
-        path: {
-          boardId,
-        }
-      }
-    }),
+    deleteBoard: (boardId: string) =>
+      deleteBoardMutation.mutate({
+        params: {
+          path: {
+            boardId,
+          },
+        },
+      }),
     getIsPending: (boardId: string) =>
       deleteBoardMutation.isPending &&
       deleteBoardMutation.variables?.params?.path?.boardId === boardId,
-  }
+  };
 }

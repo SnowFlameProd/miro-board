@@ -7,10 +7,10 @@ export function ProtectedRoute() {
   const { session } = useSession();
 
   if (!session) {
-    return <Navigate to={ROUTES.LOGIN}/>
+    return <Navigate to={ROUTES.LOGIN} />;
   }
 
-  return <Outlet/>
+  return <Outlet />;
 }
 
 export async function protectedLoader() {

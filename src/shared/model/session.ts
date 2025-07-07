@@ -8,7 +8,7 @@ type Session = {
   email: string;
   exp: number;
   iat: number;
-}
+};
 
 const TOKEN_KEY = "token";
 
@@ -36,13 +36,12 @@ export const useSession = createGStore(() => {
     const session = jwtDecode<Session>(token);
 
     // 1 секунда для пограничного случая
-    if (session.exp < (Date.now() / 1000) + 1) {
-
+    if (session.exp < Date.now() / 1000 + 1) {
       if (!refreshTokenPromise) {
         refreshTokenPromise = publicFetchClient
-          .POST('/auth/refresh')
-          .then(r => r.data?.accessToken ?? null)
-          .then(newToken => {
+          .POST("/auth/refresh")
+          .then((r) => r.data?.accessToken ?? null)
+          .then((newToken) => {
             if (newToken) {
               login(newToken);
               return newToken;
